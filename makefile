@@ -45,3 +45,6 @@ author-config:
 
 celery-worker:
 	$(PYENV) celery -A test_celery.tasks worker --loglevel=info
+
+celery-beat:
+	$(PYENV) celery -A test_celery.tasks beat -s /tmp/celerybeat-schedule

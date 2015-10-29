@@ -2,10 +2,11 @@
 # encoding: utf-8
 
 import time
+from datetime import timedelta, datetime
 
-from celery import Celery
+from .celery_app import DefaultApp
 
-app = Celery(
+app = DefaultApp(
     __name__,
     borker="redis://localhost",
     backend="rpc://",
@@ -16,3 +17,8 @@ app = Celery(
 def return_self(self, dl=1):
     time.sleep(dl)
     return self
+
+
+@app.periodic_task(timedelta(seconds=3), bind=True)
+def print_time(self):
+    print datetime.now()
