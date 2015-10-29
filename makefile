@@ -42,3 +42,6 @@ requires: $(ROOTPATH)/requirements.txt
 author-config:
 	git config user.email imyikong@gmail.com --local
 	git config user.name MrLYC --local
+
+celery-worker:
+	$(PYENV) celery -A test_celery.tasks worker --loglevel=info
